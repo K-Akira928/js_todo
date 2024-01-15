@@ -91,7 +91,6 @@ export class TodoItemView {
   #editAddEventListener(todoItemElement, todoItem, todoEditEvent) {
     const todoEditButtonElement = todoItemElement.querySelector('#js-todo-edit');
     todoEditButtonElement.addEventListener('click', () => {
-      console.log(todoItem);
       todoEditEvent({ id: todoItem.id, edit: !todoItem.edit });
     });
   }
