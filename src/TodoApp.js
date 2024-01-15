@@ -31,7 +31,7 @@ export class TodoApp {
   }
 
   #handleTodoItemAdd = (title) => {
-    this.#todoListModel.addItem(new TodoItemModel({ title }));
+    this.#todoListModel.addItem(new TodoItemModel({ title, completed: false }));
   }
 
   #handleTodoCreateSubmit = (event) => {
@@ -45,7 +45,10 @@ export class TodoApp {
 
     const todoListElement = this.#todoListView.createElement(todoItems, {
       todoDeleteEvent: ({ id }) => {
-        this.#handleTodoDelete({ id })
+        this.#handleTodoDelete({ id });
+      },
+      todoCheckboxEvent: ({ id, completed }) => {
+        this.#handleTodoToggleCheckbox({ id, completed });
       }
     });
     this.#todoListView.render(this.todoContainerElement, todoListElement);
@@ -54,6 +57,10 @@ export class TodoApp {
   #handleTodoDelete = ({ id }) => {
     window.alert('本当に削除しますか？');
     this.#todoListModel.deleteItem({ id });
+  }
+
+  #handleTodoToggleCheckbox = ({ id, completed }) => {
+    this.#todoListModel.toggleCompleted({ id, completed });
   }
 
   mount() {
