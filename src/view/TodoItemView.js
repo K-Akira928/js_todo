@@ -10,10 +10,19 @@ export class TodoItemView {
                     </div>
                   </li>`;
 
-  createElement(todoItem) {
+  createElement(todoItem, { todoDeleteEvent }) {
     const todoItemElement = htmlToElement(this.#todoDefaultHtml);
     todoItemElement.querySelector('.todo-title').textContent = todoItem.title;
 
+    this.#deleteAddEventListener(todoItemElement, todoItem, todoDeleteEvent);
+
     return todoItemElement;
+  }
+
+  #deleteAddEventListener(todoItemElement, todoItem, todoDeleteEvent) {
+    const todoDeleteButtonElement = todoItemElement.querySelector('#js-todo-delete');
+    todoDeleteButtonElement.addEventListener('click', () => {
+      todoDeleteEvent({ id: todoItem.id });
+    });
   }
 }

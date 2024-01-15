@@ -43,8 +43,17 @@ export class TodoApp {
   #handleTodoReRender = () => {
     const todoItems = this.#todoListModel.getItems();
 
-    const todoListElement = this.#todoListView.createElement(todoItems);
+    const todoListElement = this.#todoListView.createElement(todoItems, {
+      todoDeleteEvent: ({ id }) => {
+        this.#handleTodoDelete({ id })
+      }
+    });
     this.#todoListView.render(this.todoContainerElement, todoListElement);
+  }
+
+  #handleTodoDelete = ({ id }) => {
+    window.alert('本当に削除しますか？');
+    this.#todoListModel.deleteItem({ id });
   }
 
   mount() {

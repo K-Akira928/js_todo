@@ -14,6 +14,12 @@ export class TodoListModel {
     this.#itemsChangeEvent.call(this);
   }
 
+  deleteItem({ id }) {
+    this.#items = this.#items.filter((item) => { return item.id !== id });
+
+    this.#itemsChangeEvent.call(this);
+  }
+
   getItems() {
     return this.#items;
   }
