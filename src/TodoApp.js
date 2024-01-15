@@ -31,7 +31,7 @@ export class TodoApp {
   }
 
   #handleTodoItemAdd = (title) => {
-    this.#todoListModel.addItem(new TodoItemModel({ title, completed: false }));
+    this.#todoListModel.addItem(new TodoItemModel({ title, completed: false, edit: false }));
   }
 
   #handleTodoCreateSubmit = (event) => {
@@ -49,6 +49,12 @@ export class TodoApp {
       },
       todoCheckboxEvent: ({ id, completed }) => {
         this.#handleTodoToggleCheckbox({ id, completed });
+      },
+      todoEditEvent: ({ id, edit }) => {
+        this.#handleTodoTitleEdit({ id, edit });
+      },
+      todoTitleSaveEvent: ({ id, title, edit }) => {
+        this.#handleTodoTitleSave({ id, title, edit });
       }
     });
     this.#todoListView.render(this.todoContainerElement, todoListElement);
@@ -61,6 +67,15 @@ export class TodoApp {
 
   #handleTodoToggleCheckbox = ({ id, completed }) => {
     this.#todoListModel.toggleCompleted({ id, completed });
+  }
+
+  #handleTodoTitleEdit = ({ id, edit }) => {
+    this.#todoListModel.toggleEdit({ id, edit });
+  }
+
+  #handleTodoTitleSave = ({ id, title, edit }) => {
+    this.#todoListModel.toggleEdit({ id, edit });
+    this.#todoListModel.changeTitle({ id, title });
   }
 
   mount() {

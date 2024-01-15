@@ -29,6 +29,24 @@ export class TodoListModel {
     this.#itemsChangeEvent.call(this);
   }
 
+  toggleEdit({ id, edit }) {
+    const foundItem = this.#findItem(id);
+    if (!foundItem) return;
+
+    foundItem.edit = edit;
+
+    this.#itemsChangeEvent.call(this);
+  }
+
+  changeTitle({ id, title }) {
+    const foundItem = this.#findItem(id);
+    if (!foundItem) return;
+
+    foundItem.title = title;
+
+    this.#itemsChangeEvent.call(this);
+  }
+
   getItems() {
     return this.#items;
   }

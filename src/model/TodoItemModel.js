@@ -4,11 +4,13 @@ export class TodoItemModel {
   id;
   title;
   completed;
+  edit;
 
-  constructor({ title, completed }) {
+  constructor({ title, completed, edit }) {
     this.id = itemId++;
     this.title = title;
-    this.completed = this.completed;
+    this.completed = completed;
+    this.edit = edit;
   }
 
   isEmptyTitle() {
