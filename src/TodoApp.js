@@ -58,6 +58,10 @@ export class TodoApp {
       }
     });
     this.#todoListView.render(this.todoContainerElement, todoListElement);
+
+    this.todoAllCountElement.textContent = `全てのタスク:${this.#todoListModel.getAllCount()}`;
+    this.todoCompletedCountElement.textContent = `完了済み:${this.#todoListModel.getCompleteCount()}`;
+    this.todoIncompletedCountElement.textContent = `未完了:${this.#todoListModel.getIncompleteCount()}`;
   }
 
   #handleTodoDelete = ({ id }) => {

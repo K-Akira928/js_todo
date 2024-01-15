@@ -51,6 +51,18 @@ export class TodoListModel {
     return this.#items;
   }
 
+  getAllCount() {
+    return this.#items.length;
+  }
+
+  getCompleteCount() {
+    return this.#items.filter((item) => item.completed).length;
+  }
+
+  getIncompleteCount() {
+    return (this.getAllCount() - this.getCompleteCount());
+  }
+
   addItemsChangeEvent(event) {
     this.#itemsChangeEvent = event;
   }
